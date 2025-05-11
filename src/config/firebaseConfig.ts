@@ -1,12 +1,15 @@
-import Constants from 'expo-constants';
+// src/config/firebaseConfig.ts
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: Constants.expoConfig?.extra?.FIREBASE_API_KEY,
-  authDomain: Constants.expoConfig?.extra?.FIREBASE_AUTH_DOMAIN,
-  projectId: Constants.expoConfig?.extra?.FIREBASE_PROJECT_ID,
-  storageBucket: Constants.expoConfig?.extra?.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: Constants.expoConfig?.extra?.FIREBASE_MESSAGING_SENDER_ID,
-  appId: Constants.expoConfig?.extra?.FIREBASE_APP_ID,
+  apiKey: "AIzaSyBFQ0GcFUVgZb128SNo7S30JzqOrRqXvqs", // 本物を直書き
+  authDomain: "ai-sommelier-d-ai.firebaseapp.com",
+  projectId: "ai-sommelier-d-ai",
+  storageBucket: "ai-sommelier-d-ai.appspot.com",
+  messagingSenderId: "47940083455",
+  appId: "1:47940083455:web:fe9ae7a77772cea73176ca"
 };
 
-export default firebaseConfig;
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);

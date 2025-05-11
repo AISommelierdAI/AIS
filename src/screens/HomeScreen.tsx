@@ -1,52 +1,28 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useEffect } from "react";
+import { Text, View } from "react-native";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../config/firebaseConfig";
 
-const HomeScreen = () => {
+export default function HomeScreen() {
+  useEffect(() => {
+    const writeTestData = async () => {
+      try {
+        await addDoc(collection(db, "test"), {
+          name: "Dai",
+          timestamp: new Date(),
+        });
+        console.log("書き込み成功");
+      } catch (e) {
+        console.error("Firestore 書き込み失敗", e);
+      }
+    };
+
+    writeTestData();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>AI Sommelier d’AI</Text>
-
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>AI Sommelier d’AIに質問</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>写真で見てもらう</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>ペアリング教えて</Text>
-      </TouchableOpacity>
+    <View>
+      <Text>Firestoreに書き込みテスト中...</Text>
     </View>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    marginBottom: 40,
-  },
-  button: {
-    backgroundColor: '#6A0DAD',
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 8,
-    marginVertical: 10,
-    width: '100%',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-});
-
-export default HomeScreen;
+}
